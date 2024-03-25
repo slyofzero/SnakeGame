@@ -1413,7 +1413,7 @@
           if (this.cells[0].x === L.x && this.cells[0].y === L.y) {
             var n = this.cells.length - 1;
             this.cells.push(new l(this.cells[n].x, this.cells[n].y));
-            S[E].score += L.score;
+            S[E].score += 1;
             W();
             m("high");
             L.eat();
