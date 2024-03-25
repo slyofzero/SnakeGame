@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8" />
+    <title>Snake - Play the retro Snake game online for free</title>
+    <meta
+      name="description"
+      content="Play the classic mobile Snake game for free online. Eat the food but don’t hit the walls or your own tail!"
+    />
+    <meta name="author" content="Neave Interactive" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no, viewport-fit=cover"
+    />
+    <meta name="referrer" content="origin" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Snake" />
+    <meta name="application-name" content="Snake" />
+    <meta name="msapplication-tooltip" content="Snake" />
+    <meta name="msapplication-starturl" content="" />
+    <meta
+      name="msapplication-TileImage"
+      content="https://playsnake.org/assets/images/icon-400.png"
+    />
+    <meta name="msapplication-TileColor" content="#9bba5a" />
+    <meta name="msapplication-navbutton-color" content="#9bba5a" />
+    <meta name="theme-color" content="#9bba5a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="Snake" />
+    <meta
+      property="og:title"
+      content="Snake - Play the retro Snake game online for free"
+    />
+    <meta
+      property="og:description"
+      content="Play the classic mobile Snake game for free online. Eat the food but don’t hit the walls or your own tail!"
+    />
+    <meta
+      property="og:image"
+      content="https://playsnake.org/assets/images/icon-400.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@neave" />
+    <meta name="twitter:title" content="Snake" />
+    <meta
+      name="twitter:description"
+      content="Play the classic mobile Snake game for free online. Eat the food but don’t hit the walls or your own tail!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://playsnake.org/assets/images/icon-400.png"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://playsnake.org/assets/images/icon-16.png"
+    />
+    <link
+      rel="icon"
+      sizes="16x16"
+      href="https://playsnake.org/assets/images/icon-16.png"
+    />
+    <link
+      rel="icon"
+      sizes="32x32"
+      href="https://playsnake.org/assets/images/icon-32.png"
+    />
+    <link
+      rel="icon"
+      sizes="100x100"
+      href="https://playsnake.org/assets/images/icon-100.png"
+    />
+    <link
+      rel="icon"
+      sizes="200x200"
+      href="https://playsnake.org/assets/images/icon-200.png"
+    />
+    <link
+      rel="icon"
+      sizes="400x400"
+      href="https://playsnake.org/assets/images/icon-400.png"
+    />
+    <link
+      rel="image_src"
+      href="https://playsnake.org/assets/images/icon-400.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      href="https://playsnake.org/assets/images/icon-400.png"
+    />
+    <link rel="stylesheet" href="/assets/css/app.15.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+      .tab-content h2 {
+        font-size: 1.5em;
+        color: rgb(48, 181, 48);
+        text-transform: uppercase;
+      }
+
+      /* The Modal (background) */
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      /* Modal Content */
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30vw;
+      }
+
+      /* Close Button */
+
+      .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        position: relative;
+        right: 5px;
+        top: 5px;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 768px) {
+        .modal-content {
+          width: 80vw;
+        }
+      }
+
+      section .signin {
+        position: absolute;
+        width: 400px;
+        background: #222;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        border-radius: 4px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+      }
+
+      .register {
+        display: none;
+      }
+
+      section .signin .content-sign {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      section .signin .content-sign h2 {
+        font-size: 2em;
+        color: #0f0;
+        text-transform: uppercase;
+      }
+
+      section .signin .content-sign .form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      section .signin .content-sign .form .inputBox {
+        position: relative;
+        width: 100%;
+      }
+
+      section .signin .content-sign .form .inputBox input {
+        position: relative;
+        width: 100%;
+        background: #333;
+        border: none;
+        outline: none;
+        padding: 15px 10px 7.5px;
+        border-radius: 4px;
+        color: #fff;
+        font-weight: 500;
+        font-size: 1em;
+      }
+
+      .signin .content-sign .form .links {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .signin .content-sign .form .links a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .signin .content-sign .form .links a:nth-child(2) {
+        color: #0f0;
+        font-weight: 600;
+      }
+
+      .signin .content-sign .form .inputBox input[type="submit"] {
+        padding: 10px;
+        background: #0f0;
+        color: #000;
+        font-weight: 600;
+        font-size: 1.35em;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:active {
+        opacity: 0.6;
+      }
+
+      .tab-navigation {
+        display: flex;
+        left: 50%;
+        top: 3rem;
+        justify-content: center;
+        margin-bottom: 20px;
+        z-index: 1000;
+      }
+
+      .tab {
+        padding: 10px 20px;
+        background-color: #f1f1f1;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        z-index: 1000;
+      }
+
+      .tab:hover {
+        background-color: #ddd;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.show {
+        display: block;
+      }
+    </style>
+    <style>
+      .scoreboard {
+        position: fixed;
+        align-items: center;
+        width: 40vw;
+        height: 80vh;
+        z-index: 100;
+        background-color: #2b331b;
+        display: none;
+        flex-direction: column;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 2rem;
+        border-radius: 12px;
+      }
+
+      .scoreboard h1 {
+        font-size: 2rem;
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: "Equilibrium";
+      }
+
+      .scoreboard h2 {
+        font-size: 1.5rem;
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: "Equilibrium";
+      }
+
+      ul {
+        list-style: none;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #dedada;
+      }
+
+      ul li:first-child {
+        color: rgb(69, 200, 69);
+      }
+
+      ul li:nth-child(2) {
+        color: rgb(245, 236, 74);
+      }
+
+      ul li:nth-child(3) {
+        color: rgb(245, 236, 74);
+      }
+
+      ul li:nth-child(4) {
+        color: rgb(245, 160, 74);
+      }
+
+      ul li:nth-child(5) {
+        color: rgb(245, 160, 74);
+      }
+
+      @media only screen and (max-width: 600px) {
+        .scoreboard {
+          width: 80vw;
+          height: 90vh;
+        }
+      }
+    </style>
+    <style>
+      @keyframes neave-anim {
+        to {
+          background-position: 0 400%;
+        }
+      }
+
+      @keyframes fade-anim {
+        0% {
+          opacity: 0;
+        }
+        40% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        60% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-mid-anim {
+        0% {
+          opacity: 0.5;
+        }
+        40% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
+        60% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 0.5;
+        }
+      }
+
+      .neave {
+        position: absolute;
+        text-align: center;
+        vertical-align: middle;
+        left: 15px;
+        left: calc(15px + env(safe-area-inset-left));
+        top: 15px;
+        top: calc(15px + env(safe-area-inset-top));
+        width: auto;
+        height: 44px;
+        margin: 0;
+        padding: 1rem 2rem;
+        z-index: 50;
+      }
+
+      .neave .title {
+        display: none;
+      }
+
+      .neave svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 50;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        margin: 0;
+        padding: 0;
+        box-sizing: content-box;
+        pointer-events: none;
+      }
+
+      .mobile .neave svg {
+        animation: fade-mid-anim 5s infinite ease-in-out;
+      }
+
+      .neave .disc {
+        position: absolute;
+        display: block;
+        width: 44px;
+        height: 44px;
+        background-color: #9fc;
+        background-image: linear-gradient(
+          to bottom,
+          #9fc 0%,
+          #9cf 25%,
+          #f9c 50%,
+          #fc9 75%,
+          #9fc 100%
+        );
+        background-size: 100% 400%;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: neave-anim 8s infinite linear;
+        opacity: 0;
+        will-change: opacity;
+        transition: opacity 0.2s ease-out;
+      }
+
+      .mobile .neave .disc {
+        animation: neave-anim 8s infinite linear,
+          fade-anim 5s infinite ease-in-out;
+      }
+
+      body:not(.mobile) .neave:hover .disc {
+        opacity: 1;
+      }
+
+      .neave:active {
+        margin-top: 1px;
+      }
+
+      @font-face {
+        font-family: "Equilibrium";
+        font-weight: normal;
+        font-style: normal;
+        src: url(/assets/fonts/equilibrium.woff2) format("woff2"),
+          url(/assets/fonts/equilibrium.woff) format("woff");
+      }
+
+      html,
+      body,
+      div,
+      span,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      p,
+      img,
+      ul,
+      li,
+      article,
+      aside,
+      footer,
+      header,
+      nav,
+      section,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+        background: transparent;
+      }
+
+      article,
+      aside,
+      footer,
+      header,
+      nav,
+      section {
+        display: block;
+      }
+
+      body {
+        font: 17px sans-serif;
+        line-height: 1.25;
+        color: rgba(0, 0, 0, 0.75);
+        overflow: hidden;
+        background-color: #5a80ba;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      a {
+        margin: 0;
+        padding: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.75);
+        background-color: transparent;
+      }
+
+      a:hover,
+      a:active,
+      a:focus {
+        outline: 0;
+      }
+
+      a:active {
+        color: rgba(0, 0, 0, 0.75);
+      }
+
+      a:link {
+        -webkit-tap-highlight-color: transparent;
+        tap-highlight-color: transparent;
+      }
+
+      .adsbygoogle {
+        display: inline-block;
+      }
+
+      .ad.skyscraper1,
+      .ad.skyscraper2,
+      .ad.skyscraper1 .adsbygoogle,
+      .ad.skyscraper2 .adsbygoogle {
+        width: 160px;
+        height: 600px;
+      }
+
+      .ad.skyscraper1 {
+        position: absolute;
+        top: 50%;
+        margin-top: -300px;
+        left: 0;
+      }
+
+      .ad.skyscraper2 {
+        position: absolute;
+        top: 50%;
+        margin-top: -300px;
+        right: 0;
+      }
+
+      .ad.link-unit,
+      .ad.link-unit .adsbygoogle {
+        width: 728px;
+        height: 15px;
+      }
+
+      .ad.link-unit {
+        position: absolute;
+        left: 50%;
+        top: 27px;
+        margin-left: -364px;
+      }
+
+      .content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        -webkit-touch-callout: none;
+        touch-callout: none;
+      }
+
+      .mobile .neave,
+      .mobile .content,
+      .mobile .ad.skyscraper1,
+      .mobile .ad.skyscraper2 {
+        position: fixed;
+      }
+
+      .alt {
+        display: none;
+      }
+
+      .error {
+        text-align: center;
+        padding: 40px 20px;
+        line-height: 1.5;
+      }
+
+      .error a {
+        text-decoration: underline;
+      }
+
+      .game {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -294px;
+        margin-top: -235px;
+        font-family: "Equilibrium", monospace;
+        text-transform: uppercase;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        tap-highlight-color: transparent;
+      }
+
+      .mobile .game {
+        margin-top: -260px;
+      }
+
+      .ipad .game {
+        margin-top: -235px;
+      }
+
+      .game .board {
+        width: 588px;
+        height: 420px;
+        padding: 2px;
+        margin-left: -2px;
+        margin-top: -2px;
+        outline: 4px solid rgba(0, 0, 0, 0.75);
+        box-shadow: inset 0 0 60px rgba(48, 80, 0, 0.3);
+        background-color: rgb(102, 158, 204);
+        cursor: pointer;
+      }
+
+      .game.intro .board,
+      .game.countdown .board {
+        cursor: auto;
+      }
+
+      .game nav {
+        display: none;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+      }
+
+      .game nav h1 {
+        margin: 54px 0 6px 16px;
+        font-size: 144px;
+        font-weight: normal;
+        line-height: 1;
+        text-transform: lowercase;
+        pointer-events: none;
+      }
+
+      .game p {
+        font-size: 34px;
+      }
+
+      .game p.choose {
+        pointer-events: none;
+      }
+
+      .game nav p.level {
+        display: inline-block;
+        font-size: 46px;
+        padding: 30px 14px 15px 18px;
+        margin-top: 32px;
+        line-height: 1;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      body:not(.mobile) .game .info.share:hover,
+      .game .info.share:active,
+      body:not(.mobile) .game nav p.level:hover,
+      .game nav p.level:active {
+        background-color: rgba(0, 0, 0, 0.75);
+        color: #ac6;
+      }
+
+      .game h2 {
+        display: none;
+        position: absolute;
+        font-size: 120px;
+        font-weight: normal;
+        text-align: center;
+        line-height: 0.95;
+        width: 100%;
+        margin: 110px 0 0 0;
+        pointer-events: none;
+      }
+
+      .game.intro nav {
+        display: block;
+      }
+
+      .game.intro .info {
+        visibility: hidden;
+      }
+
+      .game.intro .cell:nth-child(103),
+      .game.intro .cell:nth-child(87) {
+        background-image: url(/assets/images/food.svg);
+        background-size: 100% 100%;
+        opacity: 0.75;
+        animation: spin 2s linear infinite;
+      }
+
+      .game.countdown h2.countdown {
+        display: block;
+        font-size: 184px;
+        margin-top: 150px;
+      }
+
+      .game.ended.share .info.share,
+      .game.ended h2.ended {
+        display: block;
+      }
+
+      .game.ended.best h2.ended {
+        display: none;
+      }
+
+      .game.ended.best h2.best {
+        display: block;
+      }
+
+      .game.paused .cell.snake,
+      .game.ended .cell.snake {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .game.paused .cell.food {
+        animation-play-state: paused;
+        opacity: 0.3;
+      }
+
+      .game.ended .cell.food {
+        animation: none;
+        opacity: 0.3;
+      }
+
+      .game .cell {
+        float: left;
+        width: 28px;
+        height: 28px;
+      }
+
+      .game .cell.snake {
+        background-color: rgba(0, 0, 0, 0.75);
+        border-radius: 8px;
+      }
+
+      .game .cell.food {
+        background-image: url(/assets/images/food.svg);
+        background-size: 100% 100%;
+        opacity: 0.75;
+        animation: appear 200ms cubic-bezier(0.5, 1, 0, 1.6),
+          spin 3.5s cubic-bezier(0.2, 0.6, 0.4, 1) 200ms;
+      }
+
+      @keyframes appear {
+        from {
+          transform: scale(0.1);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .game .info {
+        position: absolute;
+        margin-top: 20px;
+      }
+
+      .game .info.left {
+        left: 0;
+        margin-left: -7px;
+        pointer-events: none;
+      }
+
+      .game .info.share {
+        display: none;
+        left: 50%;
+        width: 140px;
+        text-align: center;
+        cursor: pointer;
+        animation: appear 200ms cubic-bezier(0.5, 1, 0, 1.6);
+        border-radius: 6px;
+        padding: 10px 0 2px 5px;
+        margin: 10px 0 0 -69px;
+      }
+
+      html[lang="es"] .game .info.share,
+      html[lang="pt-BR"] .game .info.share {
+        width: 200px;
+        margin-left: -119px;
+      }
+
+      .game .info.right {
+        right: 0;
+        margin-right: -7px;
+        pointer-events: none;
+      }
+
+      .neave svg {
+        border-color: rgba(0, 0, 0, 0.8) !important;
+        transition: border-color 0.1s linear;
+      }
+
+      .neave svg path {
+        fill: rgba(0, 0, 0, 0.8);
+      }
+
+      .mute {
+        position: absolute;
+        width: 38px;
+        height: 38px;
+        right: 15px;
+        right: calc(15px + env(safe-area-inset-right));
+        top: 15px;
+        top: calc(15px + env(safe-area-inset-top));
+        opacity: 0.5;
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-transition: opacity 0.1s linear;
+        -moz-transition: opacity 0.1s linear;
+        transition: opacity 0.1s linear;
+      }
+
+      body:not(.mobile) .mute:hover {
+        opacity: 1;
+      }
+
+      .ad {
+        outline: 1px solid rgba(0, 0, 0, 0.75);
+        background-color: rgba(0, 0, 0, 0.75);
+        overflow: hidden;
+      }
+
+      .adsbygoogle {
+        display: inline-block;
+      }
+
+      .ad.skyscraper1,
+      .ad.skyscraper2,
+      .ad.skyscraper1 .adsbygoogle,
+      .ad.skyscraper2 .adsbygoogle {
+        width: 160px;
+        height: 600px;
+      }
+
+      .ad.skyscraper1 {
+        position: absolute;
+        top: 50%;
+        margin-top: -300px;
+        left: 0;
+      }
+
+      .ad.skyscraper2 {
+        position: absolute;
+        top: 50%;
+        margin-top: -300px;
+        right: 0;
+      }
+
+      .ad.mobile,
+      .ad.mobile .adsbygoogle {
+        display: block;
+        width: 100%;
+        height: 50px;
+      }
+
+      .ad.mobile {
+        position: fixed;
+        bottom: 0;
+        bottom: env(safe-area-inset-bottom);
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      .ad.mobile .adsbygoogle {
+        margin: 0 auto;
+      }
+
+      .cookies {
+        position: fixed;
+        box-sizing: border-box;
+        display: table;
+        background-color: #fff;
+        color: #000;
+        width: 100%;
+        bottom: 0;
+        text-align: left;
+        padding: 40px;
+        padding-bottom: calc(40px + env(safe-area-inset-bottom));
+        padding-left: calc(40px + env(safe-area-inset-left));
+        padding-right: calc(40px + env(safe-area-inset-right));
+        font-size: 17px;
+        line-height: 1.3;
+        user-select: none;
+      }
+
+      .cookies p {
+        display: table-cell;
+        margin: 0;
+        padding-right: 20px;
+        vertical-align: top;
+      }
+
+      .cookies a {
+        color: #666;
+        text-decoration: underline;
+        white-space: nowrap;
+      }
+
+      .cookies button {
+        display: table-cell;
+        padding: 12px 20px;
+        border: 0;
+        font: inherit;
+        font-weight: bold;
+        color: #fff;
+        background-color: #2b331b;
+        cursor: pointer;
+        outline: 0;
+        cursor: pointer;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+
+      body.cookies-consent .cookies {
+        display: none;
+      }
+
+      @media (min-width: 1261px) {
+        .ad.skyscraper1 {
+          margin-left: 110px;
+        }
+        .ad.skyscraper2 {
+          margin-right: 110px;
+        }
+      }
+
+      @media (max-height: 800px) and (max-width: 1260px) {
+        .ad.skyscraper1,
+        .ad.skyscraper2 {
+          margin-top: -270px;
+        }
+      }
+
+      @media (max-height: 660px) and (max-width: 1260px) {
+        body:not(.mobile) .neave {
+          display: none !important;
+        }
+        body:not(.mobile) .mute {
+          display: none;
+        }
+        .ad.skyscraper1,
+        .ad.skyscraper2 {
+          margin-top: -300px;
+        }
+      }
+
+      @media (max-width: 940px), (max-height: 530px) {
+        .game {
+          transform: scale(0.5);
+          margin-top: -222px;
+        }
+        .mobile .game {
+          margin-top: -248px;
+        }
+        .ipad .game {
+          margin-top: -222px;
+        }
+      }
+
+      @media (max-height: 550px) {
+        .privacy {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px), (max-height: 530px) {
+        .ad.skyscraper1,
+        .ad.skyscraper2,
+        .privacy {
+          display: none;
+        }
+        body:not(.mobile) .neave {
+          display: block !important;
+        }
+        body:not(.mobile) .mute {
+          display: block;
+        }
+        .cookies {
+          display: block;
+          font-size: 15px;
+          padding: 18px;
+          padding-bottom: calc(18px + env(safe-area-inset-bottom));
+          padding-left: calc(18px + env(safe-area-inset-left));
+          padding-right: calc(18px + env(safe-area-inset-right));
+        }
+        .cookies p {
+          display: block;
+          padding-right: 0;
+        }
+        .cookies button {
+          display: block;
+          width: 100%;
+          margin-top: 18px;
+        }
+      }
+
+      @media (max-width: 440px) and (max-height: 420px) {
+        body:not(.mobile) .neave {
+          display: none !important;
+        }
+        body:not(.mobile) .mute {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a
+      type="button"
+      style="position: fixed; top: 1rem; left: 1rem; z-index: 50; opacity: 80%"
+      onclick="openScore()"
+      ><svg
+        fill="#000"
+        height="32px"
+        width="32px"
+        version="1.1"
+        id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 297 297"
+        xml:space="preserve"
+      >
+        <g>
+          <g>
+            <g>
+              <path
+                d="M221.982,276.506h-46.106l-14.886-74.432h-24.98l-14.886,74.432H75.018c-5.659,0-10.247,4.588-10.247,10.247
+					   S69.359,297,75.018,297h146.964c5.659,0,10.247-4.588,10.247-10.247S227.641,276.506,221.982,276.506z"
+              />
+              <path
+                d="M67.845,121.42v-10.485c-37.612-2.567-37.659-25.779-37.691-44.644c-0.016-9.411-0.01-31.684-0.005-44.847h37.696V0.95
+					   H19.907C14.25,0.95,9.663,5.534,9.66,11.191c0,0-0.023,41.35,0,55.134c0.018,10.492,0.045,26.348,8.466,40.176
+					   c9.346,15.344,26.287,23.718,50.369,24.978C68.082,128.181,67.845,124.829,67.845,121.42z"
+              />
+              <path
+                d="M287.34,11.191c-0.003-5.657-4.59-10.241-10.247-10.241h-47.938v20.494h37.696c0.005,13.162,0.011,35.436-0.005,44.847
+					   c-0.032,18.865-0.079,42.078-37.691,44.644v10.485c0,3.409-0.237,6.761-0.65,10.06c24.082-1.261,41.023-9.634,50.369-24.978
+					   c8.421-13.829,8.448-29.684,8.466-40.176C287.363,52.541,287.34,11.191,287.34,11.191z"
+              />
+              <path
+                d="M136.108,95.505l-1.852,12.198l11.029-5.53c1.012-0.507,2.113-0.762,3.215-0.762s2.204,0.254,3.215,0.762l11.029,5.53
+					   l-1.852-12.198c-0.339-2.239,0.397-4.505,1.987-6.116l8.667-8.779l-12.173-2.008c-2.234-0.368-4.162-1.769-5.203-3.78
+					   l-5.67-10.958l-5.671,10.957c-1.041,2.01-2.969,3.411-5.203,3.78l-12.173,2.008l8.667,8.779
+					   C135.711,90.999,136.447,93.266,136.108,95.505z"
+              />
+              <path
+                d="M148.5,187.728c36.563,0,66.309-29.746,66.309-66.308V0H82.191v121.42C82.191,157.982,111.937,187.728,148.5,187.728z
+						M103.791,73.57c0.829-2.55,3.009-4.424,5.654-4.86l22.297-3.678l10.387-20.069c1.233-2.381,3.69-3.876,6.37-3.876
+					   s5.138,1.495,6.37,3.876l10.387,20.069l22.297,3.678c2.645,0.436,4.825,2.311,5.654,4.86c0.829,2.55,0.166,5.348-1.717,7.256
+					   l-15.876,16.081l3.392,22.342c0.402,2.651-0.706,5.304-2.876,6.88c-1.249,0.908-2.728,1.37-4.217,1.37
+					   c-1.097,0-2.198-0.251-3.214-0.762l-20.2-10.129l-20.2,10.129c-2.397,1.203-5.262,0.968-7.431-0.608
+					   c-2.17-1.576-3.278-4.229-2.876-6.88l3.392-22.342l-15.876-16.081C103.625,78.918,102.963,76.12,103.791,73.57z"
+              />
+            </g>
+          </g>
+        </g></svg
+    ></a>
+    <div class="alt">
+      <h1>Snake</h1>
+      <p>
+        Play the classic retro mobile phone game in your web browser! Guide the
+        snake towards the food but avoid your ever-growing tail.
+      </p>
+    </div>
+    <section class="content">
+      <div class="mute" style="display: none">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <g fill="#000">
+            <polygon
+              points="14.025,38.004 14.025,61.993 31.548,61.993 55.537,85.982 55.537,14.018 31.552,38.004"
+            ></polygon>
+            <path
+              d="M67.41,34.095l-4.243,4.239c6.43,6.432,6.43,16.896,0,23.324L67.41,65.9C76.179,57.129,76.179,42.864,67.41,34.095z"
+            ></path>
+            <path
+              d="M75.89,25.616l-4.241,4.239c11.105,11.105,11.105,29.176,0,40.284l4.241,4.241C89.337,60.934,89.337,39.06,75.89,25.616z"
+            ></path>
+          </g>
+        </svg>
+      </div>
+      <div
+        class="game intro notranslate"
+        data-level0="Slug"
+        data-level1="Worm"
+        data-level2="Python"
+      >
+        <nav>
+          <h1>Snake</h1>
+          <p class="choose">Choose level:</p>
+          <p class="level" data-level="0">Slug</p>
+          <p class="level" data-level="1">Worm</p>
+          <p class="level" data-level="2">Python</p>
+        </nav>
+        <h2 class="countdown"></h2>
+        <h2 class="ended">Game over!</h2>
+        <h2 class="best">Best score!</h2>
+        <div class="board"></div>
+        <p class="info left"><span class="score">0</span></p>
+        <p class="info share" data-url="" data-text="I scored %d in Snake!">
+          Share!
+        </p>
+        <p class="info right">
+          <span class="level"></span> <span class="best">0</span>
+        </p>
+      </div>
+      <div class="signin">
+        <button onclick="closeForm()">Close</button>
+        <div class="signin-form content-sign">
+          <h2 class="sign">Sign In</h2>
+          <h2 class="register">Register</h2>
+          <div class="form">
+            <div class="inputBox register">
+              <input
+                type="text"
+                id="full_name"
+                placeholder="Full Name"
+                required
+              />
+            </div>
+            <div class="inputBox">
+              <input type="email" id="email" placeholder="Email" required />
+            </div>
+            <div class="inputBox">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="inputBox register">
+              <input
+                type="password"
+                id="password_confirm"
+                placeholder="Confirm Password"
+                required
+              />
+            </div>
+            <div class="links sign">
+              <a href="#">Forgot Password</a>
+              <button onclick="showRegisterForm()">Register</button>
+            </div>
+            <div class="inputBox sign">
+              <button onclick="login()">Login</button>
+            </div>
+            <div class="inputBox register">
+              <button onclick="register()">Submit</button>
+              <button onclick="closeRegisterForm()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="scoreboard" class="scoreboard">
+      <h1>Snake Game Leaderboard</h1>
+      <a
+        type="button"
+        onclick="closeScore()"
+        style="
+          position: absolute;
+          right: 1rem;
+          top: 1rem;
+          z-index: 1000;
+          background-color: transparent;
+        "
+        ><svg
+          fill="#fff"
+          height="16px"
+          width="16px"
+          version="1.1"
+          id="Capa_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 460.775 460.775"
+          xml:space="preserve"
+        >
+          <path
+            d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+			   c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+			   c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+			   c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+			   l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+			   c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
+          /></svg
+      ></a>
+      <div class="tab-navigation">
+        <button class="tab" onclick="openTab('tab1')">Slug</button>
+        <button class="tab" onclick="openTab('tab2')">Worm</button>
+        <button class="tab" onclick="openTab('tab3')">Python</button>
+      </div>
+
+      <div class="tab-content" id="tab1">
+        <h2>Slug Difficulty</h2>
+        <ul id="easy-scores">
+          <!-- Scores for easy difficulty will be displayed here -->
+        </ul>
+      </div>
+
+      <div class="tab-content" id="tab2">
+        <h2>Worm Difficulty</h2>
+        <ul id="medium-scores">
+          <!-- Scores for medium difficulty will be displayed here -->
+        </ul>
+      </div>
+
+      <div class="tab-content" id="tab3">
+        <h2>Python Difficulty</h2>
+        <ul id="hard-scores">
+          <!-- Scores for hard difficulty will be displayed here -->
+        </ul>
+      </div>
+    </div>
+    <!-- The modal -->
+    <div id="usernameModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <p>
+          Congratulations! You made it to the leaderboard! <br />
+          Please enter your name:
+        </p>
+        <input type="text" id="usernameInput" />
+        <button id="submitUsernameBtn">Submit</button>
+      </div>
+    </div>
+
+    <script>
+      (function (a, s) {
+        "use strict";
+        a.onerror = function (e, t, n) {
+          return false;
+        };
+        a.requestAnimationFrame =
+          a.requestAnimationFrame ||
+          a.webkitRequestAnimationFrame ||
+          a.mozRequestAnimationFrame ||
+          a.msRequestAnimationFrame ||
+          function (e) {
+            return setTimeout(e, 1e3 / 60);
+          };
+        a.cancelAnimationFrame =
+          a.cancelAnimationFrame ||
+          a.webkitCancelAnimationFrame ||
+          a.mozCancelAnimationFrame ||
+          a.msCancelAnimationFrame ||
+          function (e) {
+            clearTimeout(e);
+          };
+        a.AudioContext = a.AudioContext || a.webkitAudioContext;
+        var e = false;
+        try {
+          var t = Object.defineProperty({}, "passive", {
+            get: function () {
+              e = true;
+            },
+          });
+          a.addEventListener("_", null, t);
+          a.removeEventListener("_", null, t);
+        } catch (e) {}
+        var n = (function (e) {
+          try {
+            var t = "_";
+            e.setItem(t, t);
+            e.removeItem(t);
+            return true;
+          } catch (e) {
+            return false;
+          }
+        })(a.localStorage);
+        var i = s.getElementById("consent");
+        var o = !!i;
+
+        function r() {
+          (a.adsbygoogle || []).pauseAdRequests = 0;
+          if (o) {
+            s.body.classList.add("cookies-consent");
+          }
+        }
+
+        function l(e, t) {
+          this.x = e;
+          this.y = t;
+        }
+
+        function u() {
+          this.direction = g.DOWN;
+          this.nextDirection = g.DOWN;
+          this.cells = [];
+          this.reset();
+        }
+        u.prototype.reset = function () {
+          this.direction = g.DOWN;
+          this.nextDirection = g.DOWN;
+          this.cells = [new l(10, 2), new l(10, 1), new l(10, 0)];
+        };
+        u.prototype.containsCell = function (e, t) {
+          for (var n = this.cells.length; n--; ) {
+            var i = this.cells[n];
+            if (i.x === e && i.y === t) {
+              return true;
+            }
+          }
+          return false;
+        };
+        u.prototype.render = function (e) {
+          for (var t = x.cells.length; t--; ) {
+            var n = x.cells[t];
+            if (n.x >= 0 && n.x < O.width && n.y >= 0 && n.y < O.height) {
+              var i = b[n.x][n.y];
+              if (e) {
+                i.classList.add("snake");
+              } else {
+                i.classList.remove("snake");
+              }
+            }
+          }
+        };
+        u.prototype.move = function () {
+          for (var e = this.cells.length - 1; e > 0; e--) {
+            this.cells[e].x = this.cells[e - 1].x;
+            this.cells[e].y = this.cells[e - 1].y;
+          }
+          switch (this.nextDirection) {
+            case g.LEFT:
+              this.cells[0].x--;
+              break;
+            case g.RIGHT:
+              this.cells[0].x++;
+              break;
+            case g.UP:
+              this.cells[0].y--;
+              break;
+            case g.DOWN:
+              this.cells[0].y++;
+              break;
+          }
+          this.direction = this.nextDirection;
+          if (
+            this.cells[0].x < 0 ||
+            this.cells[0].x >= O.width ||
+            this.cells[0].y < 0 ||
+            this.cells[0].y >= O.height
+          ) {
+            M();
+            return;
+          }
+          for (var t = 1; t < this.cells.length; t++) {
+            if (
+              this.cells[0].x === this.cells[t].x &&
+              this.cells[0].y === this.cells[t].y
+            ) {
+              M();
+              return;
+            }
+          }
+          if (this.cells[0].x === L.x && this.cells[0].y === L.y) {
+            var n = this.cells.length - 1;
+            this.cells.push(new l(this.cells[n].x, this.cells[n].y));
+            S[E].score += L.score;
+            W();
+            m("high");
+            L.eat();
+            L.generate();
+          } else if (L.score > 5) {
+            L.score -= 5;
+          }
+        };
+
+        function f() {
+          this.x = 0;
+          this.y = 0;
+          this.score = 0;
+        }
+        f.prototype.eat = function () {
+          b[this.x][this.y].classList.remove("food");
+        };
+        f.prototype.generate = function () {
+          if (x.cells.length < O.width * O.height - 1) {
+            var e, t;
+            do {
+              e = Math.floor(Math.random() * O.width);
+              t = Math.floor(Math.random() * O.height);
+            } while (x.containsCell(e, t));
+            b[e][t].classList.add("food");
+            this.x = e;
+            this.y = t;
+            this.score = 100;
+          }
+        };
+
+        function h(e, t) {
+          this.name = e;
+          this.speed = t;
+          this.score = 0;
+        }
+        h.prototype.getBestScore = function () {
+          if (n) {
+            return parseInt(localStorage.getItem("score" + E), 10) || 0;
+          }
+          return 0;
+        };
+
+        function d(t) {
+          var e = new XMLHttpRequest();
+          e.open("GET", "/assets/audio/" + t + ".mp3", true);
+          e.responseType = "arraybuffer";
+          e.onload = function () {
+            N.decodeAudioData(
+              e.response,
+              function (e) {
+                D[t] = e;
+              },
+              function () {}
+            );
+          };
+          e.send();
+        }
+
+        function m(e) {
+          if (w || !D[e]) {
+            return;
+          }
+          if (N && N.resume) {
+            N.resume();
+          }
+          var t = N.createBufferSource();
+          t.buffer = D[e];
+          t.connect(N.destination);
+          if (t.start) {
+            t.start(0);
+          } else {
+            t.noteOn(0);
+          }
+        }
+        var v = {},
+          g = {
+            UP: 0,
+            DOWN: 1,
+            LEFT: 2,
+            RIGHT: 3,
+          },
+          y = {
+            INTRO: "intro",
+            COUNTDOWN: "countdown",
+            PLAYING: "playing",
+            ENDED: "ended",
+            PAUSED: "paused",
+          },
+          p = y.INTRO,
+          x,
+          L,
+          D = [],
+          N,
+          w = false,
+          A,
+          I,
+          T = 0,
+          E = 0,
+          S = [new h("Slug", 150), new h("Worm", 100), new h("Python", 50)],
+          b = [[]],
+          O = {
+            width: 21,
+            height: 15,
+          },
+          P = {
+            x: 0,
+            y: 0,
+          };
+
+        function k() {
+          s.addEventListener("keydown", function (e) {
+            switch (e.keyCode) {
+              case 38:
+              case 87:
+                if (p === y.PLAYING && x.direction !== g.DOWN) {
+                  x.nextDirection = g.UP;
+                }
+                break;
+              case 40:
+              case 83:
+                if (p === y.PLAYING && x.direction !== g.UP) {
+                  x.nextDirection = g.DOWN;
+                }
+                break;
+              case 37:
+              case 65:
+                if (p === y.PLAYING && x.direction !== g.RIGHT) {
+                  x.nextDirection = g.LEFT;
+                }
+                break;
+              case 39:
+              case 68:
+                if (p === y.PLAYING && x.direction !== g.LEFT) {
+                  x.nextDirection = g.RIGHT;
+                }
+                break;
+              case 77:
+                B();
+                break;
+              case 32:
+              case 80:
+                Q();
+                break;
+            }
+          });
+        }
+
+        function C() {
+          s.addEventListener(
+            "touchstart",
+            function (e) {
+              if (p === y.PLAYING || p === y.COUNTDOWN) {
+                e.preventDefault();
+              }
+              P.x = e.changedTouches[0].screenX;
+              P.y = e.changedTouches[0].screenY;
+            },
+            e
+              ? {
+                  passive: false,
+                }
+              : false
+          );
+          s.addEventListener(
+            "touchmove",
+            function (e) {
+              var t = e.changedTouches[0].screenX - P.x,
+                n = e.changedTouches[0].screenY - P.y;
+              if (p !== y.PLAYING || Math.sqrt(t * t + n * n) < 22) {
+                return;
+              }
+              P.x = e.changedTouches[0].screenX;
+              P.y = e.changedTouches[0].screenY;
+              var i = ((Math.atan2(n, t) / Math.PI) * 180 + 360) % 360;
+              if (i >= 45 && i < 135) {
+                if (x.direction !== g.UP) {
+                  x.nextDirection = g.DOWN;
+                }
+              } else if (i >= 135 && i < 225) {
+                if (x.direction !== g.RIGHT) {
+                  x.nextDirection = g.LEFT;
+                }
+              } else if (i >= 225 && i < 315) {
+                if (x.direction !== g.DOWN) {
+                  x.nextDirection = g.UP;
+                }
+              } else if (i >= 315 || i < 45) {
+                if (x.direction !== g.LEFT) {
+                  x.nextDirection = g.RIGHT;
+                }
+              }
+            },
+            e
+              ? {
+                  passive: true,
+                }
+              : false
+          );
+          v.board.addEventListener(
+            "touchstart",
+            function (e) {
+              if (p === y.PLAYING || p === y.COUNTDOWN) {
+                e.preventDefault();
+              }
+            },
+            e
+              ? {
+                  passive: false,
+                }
+              : false
+          );
+        }
+
+        function q(e) {
+          X(parseInt(e.target.dataset.level, 10));
+        }
+
+        function G() {
+          var e = this.dataset && this.dataset.url ? this.dataset.url : "",
+            t = this.dataset && this.dataset.text ? this.dataset.text : "",
+            n = S[E].score;
+          t = t.replace("%d", n);
+          if (navigator.share && a.Promise) {
+            navigator
+              .share({
+                title: "Snake",
+                text: t,
+                url: e,
+              })
+              .then(function () {})
+              .catch(function () {});
+          } else {
+            var i = 600,
+              s = 340,
+              o = screenX + (innerWidth - i) / 2,
+              r = screenY + (innerHeight - s) / 2;
+            a.open(
+              "https://neave.com/share/?url=" +
+                encodeURIComponent(e) +
+                "&text=" +
+                t,
+              "snake-share",
+              "resizable=yes,toolbar=no,scrollbars=yes,status=no,width=" +
+                i +
+                ",height=" +
+                s +
+                ",left=" +
+                o +
+                ",top=" +
+                r
+            );
+          }
+        }
+
+        function F() {
+          v.board.addEventListener(
+            "mousedown",
+            function (e) {
+              if (p === y.PLAYING || p === y.PAUSED) {
+                Q();
+              } else if (p === y.ENDED) {
+                v.game.classList.remove("best", "share");
+                j(y.INTRO);
+                H();
+              }
+            },
+            false
+          );
+          for (var e = v.introButtons.length; e--; ) {
+            v.introButtons[e].addEventListener("click", q, false);
+          }
+          v.share.addEventListener("click", G, false);
+        }
+
+        function R() {
+          v.level.textContent = S[E].name;
+        }
+
+        function W() {
+          v.score.textContent = S[E].score.toString();
+        }
+
+        function Y() {
+          v.best.textContent = S[E].getBestScore().toString();
+        }
+
+        function U() {
+          for (var e = v.mute.length; e--; ) {
+            v.mute[e].style.display = w ? "none" : "";
+          }
+        }
+
+        function B() {
+          w = !w;
+          if (n) {
+            try {
+              localStorage.setItem("muted", w.toString());
+            } catch (e) {}
+          }
+          U();
+        }
+
+        function M() {
+          $();
+          j(y.ENDED);
+          m("die");
+
+          if (n) {
+            if (S[E].score > S[E].getBestScore()) {
+              try {
+                localStorage.setItem("score" + E, S[E].score);
+              } catch (e) {}
+              v.game.classList.add("best");
+            }
+          }
+
+          // Call the updateScoreAtGameOver function with the difficulty level and S array
+          updateScoreAtGameOver(E, S);
+
+          Y();
+          if (S[E].score > 0) {
+            v.game.classList.add("share");
+          }
+        }
+
+        function H() {
+          x.render(false);
+          x.reset();
+          L.eat();
+        }
+
+        function X(e) {
+          if (p !== y.INTRO) {
+            return;
+          }
+          E = isNaN(e) ? 1 : e;
+          S[E].score = 0;
+          R();
+          W();
+          Y();
+          j(y.COUNTDOWN);
+          T = 4;
+          z();
+        }
+
+        function z() {
+          T--;
+          if (T > 0) {
+            m("low");
+            v.countdown.textContent = T.toString();
+            setTimeout(z, 500);
+          } else {
+            m("high");
+            v.countdown.textContent = "GO!";
+            setTimeout(_, 500);
+          }
+        }
+
+        function _() {
+          j(y.PLAYING);
+          L.generate();
+          Z();
+        }
+
+        function j(e) {
+          v.game.classList.remove(p);
+          v.game.classList.add(e);
+          p = e;
+        }
+
+        function J() {
+          j(y.PAUSED);
+          $();
+        }
+
+        function K() {
+          j(y.PLAYING);
+          Z();
+        }
+
+        function Q() {
+          if (p === y.PLAYING) {
+            J();
+          } else if (p === y.PAUSED) {
+            K();
+          }
+        }
+
+        function V() {
+          I = requestAnimationFrame(Z);
+        }
+
+        function Z() {
+          A = setTimeout(V, S[E].speed);
+          x.render(false);
+          x.move();
+          x.render(true);
+        }
+
+        function $() {
+          clearTimeout(A);
+          cancelAnimationFrame(I);
+        }
+
+        function ee() {
+          for (var e = 0; e < O.width * O.height; e++) {
+            var t = e % O.width,
+              n = Math.floor(e / O.width) % O.height,
+              i = s.createElement("div");
+            if (n === 0) {
+              b[t] = [];
+            }
+            b[t][n] = i;
+            i.className = "cell";
+            v.board.appendChild(i);
+          }
+        }
+        s.addEventListener("DOMContentLoaded", function () {
+          v = {
+            game: s.querySelector(".game"),
+            board: s.querySelector(".game .board"),
+            score: s.querySelector(".info .score"),
+            best: s.querySelector(".info .best"),
+            level: s.querySelector(".info .level"),
+            share: s.querySelector(".info.share"),
+            introButtons: s.querySelectorAll(".game nav .level"),
+            countdown: s.querySelector(".game h2.countdown"),
+            muteButton: s.querySelector(".mute"),
+            mute: s.querySelectorAll(".mute path"),
+            privacy: s.querySelector(".privacy"),
+          };
+          ee();
+          k();
+          C();
+          F();
+          if (v.game.dataset && v.game.dataset.level0) {
+            S[0].name = v.game.dataset.level0;
+            S[1].name = v.game.dataset.level1;
+            S[2].name = v.game.dataset.level2;
+          }
+          if (a.AudioContext) {
+            N = new AudioContext();
+            d("low");
+            d("high");
+            d("die");
+            if (n) {
+              try {
+                w = localStorage.getItem("muted") === "true";
+              } catch (e) {
+                w = false;
+              }
+            }
+            U();
+            v.muteButton.addEventListener(
+              "touchstart",
+              function (e) {
+                e.preventDefault();
+                B();
+              },
+              e
+                ? {
+                    passive: false,
+                  }
+                : false
+            );
+            v.muteButton.addEventListener(
+              "click",
+              function (e) {
+                e.preventDefault();
+                B();
+              },
+              e
+                ? {
+                    passive: false,
+                  }
+                : false
+            );
+          }
+          x = new u();
+          L = new f();
+          H();
+        });
+      })(window, document);
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+			 https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script>
+      function showRegisterForm() {
+        // Show the registration form by setting its display style to "block"
+        var registerForms = document.querySelectorAll(".register");
+        var signinForms = document.querySelectorAll(".sign");
+
+        registerForms.forEach((registerForm) => {
+          registerForm.style.display = "block";
+        });
+
+        signinForms.forEach((signinForm) => {
+          signinForm.style.display = "none";
+        });
+      }
+
+      function closeRegisterForm() {
+        // Close the registration form by setting its display style back to "none"
+        var registerForms = document.querySelectorAll(".register");
+        var signinForms = document.querySelectorAll(".sign");
+
+        registerForms.forEach((registerForm) => {
+          registerForm.style.display = "none";
+        });
+
+        signinForms.forEach((signinForm) => {
+          signinForm.style.display = "block";
+        });
+      }
+
+      function closeForm() {
+        // Close the registration form by setting its display style back to "none"
+        var Form = document.querySelector(".signin");
+        Form.style.display = "none";
+      }
+
+      function openForm() {
+        // Close the registration form by setting its display style back to "none"
+        var Form = document.querySelector(".signin");
+        var registerForms = document.querySelectorAll(".register");
+        var signinForms = document.querySelectorAll(".sign");
+
+        registerForms.forEach((registerForm) => {
+          registerForm.style.display = "none";
+        });
+
+        signinForms.forEach((signinForm) => {
+          signinForm.style.display = "block";
+        });
+        Form.style.display = "block";
+      }
+    </script>
+    <script>
+      function openTab(tabName) {
+        // Hide all tab contents
+        var tabContents = document.querySelectorAll(".tab-content");
+        tabContents.forEach(function (content) {
+          content.classList.remove("show");
+        });
+
+        // Show the selected tab content
+        var selectedTab = document.getElementById(tabName);
+        selectedTab.classList.add("show");
+      }
+
+      function openScore() {
+        var scoreboard = document.getElementById("scoreboard");
+        scoreboard.style.display = "flex";
+      }
+
+      function closeScore() {
+        var scoreboard = document.getElementById("scoreboard");
+        scoreboard.style.display = "none";
+      }
+
+      // Show the default tab on page load
+      openTab("tab1");
+    </script>
+    <script src="index.js"></script>
+  </body>
+</html>
