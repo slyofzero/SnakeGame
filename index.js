@@ -321,9 +321,9 @@ async function displayTopScores() {
     mediumScores.sort((a, b) => b[1].score - a[1].score);
     hardScores.sort((a, b) => b[1].score - a[1].score);
 
-    topScores[0] = easyScores;
-    topScores[1] = mediumScores;
-    topScores[2] = hardScores;
+    topScores[0] = easyScores.slice(0, 10);
+    topScores[1] = mediumScores.slice(0, 10);
+    topScores[2] = hardScores.slice(0, 10);
 
     // // Store scores in the topScores object based on difficulty level
     // snapshot.forEach(function (childSnapshot) {
