@@ -161,17 +161,19 @@ async function updateScore(score, difficulty) {
   var submitBtn = document.getElementById("submitUsernameBtn");
   const storedUserId = JSON.parse(localStorage.getItem("snake-userId")) || {};
 
+  const bestScore = Number(localStorage.getItem(`score${difficulty}`));
+  console.log(bestScore);
   const difficultyName =
     difficulty === 0 ? "easy" : difficulty === 1 ? "medium" : "hard";
   if (storedUserId[difficultyName]) {
     await fetch(
-      `https://mario-be.vercel.app/api/users/${storedUserId[difficultyName]}?prefix=snake`,
+      `https://mario-be.vercel.app/api/users/${storedUserId[difficultyName]}?prefix=snake&replace=true`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ score }),
+        body: JSON.stringify({ score: bestScore }),
       }
     );
   }
