@@ -281,7 +281,7 @@ async function displayTopScores() {
   const response = await fetch(
     "https://mario-be.vercel.app/api/users?prefix=snake"
   );
-  const users = await response.json();
+  const topScores = await response.json();
 
   var easyScoresList = document.getElementById("easy-scores");
   var mediumScoresList = document.getElementById("medium-scores");
@@ -295,36 +295,6 @@ async function displayTopScores() {
   var scoresRef = database.ref("scores");
 
   scoresRef.once("value", function (snapshot) {
-    var topScores = {
-      0: [], // Easy scores
-      1: [], // Medium scores
-      2: [], // Hard scores
-    };
-
-    const easyScores = [];
-    const mediumScores = [];
-    const hardScores = [];
-
-    users.forEach((user) => {
-      const { id, name, score, difficulty } = user;
-
-      if (difficulty === "easy") {
-        easyScores.push([id, { score, userName: name }]);
-      } else if (difficulty === "medium") {
-        mediumScores.push([id, { score, userName: name }]);
-      } else if (difficulty === "hard") {
-        hardScores.push([id, { score, userName: name }]);
-      }
-    });
-
-    easyScores.sort((a, b) => b[1].score - a[1].score);
-    mediumScores.sort((a, b) => b[1].score - a[1].score);
-    hardScores.sort((a, b) => b[1].score - a[1].score);
-
-    topScores[0] = easyScores.slice(0, 10);
-    topScores[1] = mediumScores.slice(0, 10);
-    topScores[2] = hardScores.slice(0, 10);
-
     // // Store scores in the topScores object based on difficulty level
     // snapshot.forEach(function (childSnapshot) {
     //   var difficultyLevel = childSnapshot.key; // Get the difficulty level (0, 1, or 2)
